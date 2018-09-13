@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Конвертер валют</string>
+    <string name="from">Конвертировать из</string>
+    <string name="to">Конвертировать в</string>
 
     <string-array name="currencies">
         <item>RUB</item>
