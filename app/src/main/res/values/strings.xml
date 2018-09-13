@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Currency Converter</string>
-    <string name="button_label">Конвертировать</string>
+    <string name="app_name">Конвертер валют</string>
 
     <string-array name="currencies">
         <item>RUB</item>

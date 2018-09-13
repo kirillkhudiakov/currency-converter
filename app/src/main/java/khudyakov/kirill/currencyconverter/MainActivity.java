@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         textView.setText("");
         statusTextView.setText("");
-        Log.d("ME", "YEAAA");
         progressBar.setVisibility(View.VISIBLE);
         String leftCurrency = leftSpinner.getSelectedItem().toString();
         String rightCurrency = rightSpinner.getSelectedItem().toString();
@@ -110,13 +109,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Cursor cursor = database.rawQuery(sql,null);
         if (cursor.getCount() == 0) {
-            textView.setText("Отстутствует подключение к интернету");
-            statusTextView.setText("");
+            textView.setText("");
+            statusTextView.setText("Чтобы узнать курс ваших любимых валют, подключитесь к интернету");
             return;
         }
         cursor.moveToFirst();
 
-        String price = cursor.getString(cursor.getColumnIndex("Price"));
+        String price = cutDecimals(cursor.getString(1));
         String text = String.format("1 %s = %s %s", leftCurrency, price, rightCurrency);
 
         textView.setText(text);
@@ -182,5 +181,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yy");
 
         return dateFormat.format(new Date());
+    }
+
+    String cutDecimals(String number) {
+        int dotPosition = number.indexOf('.');
+        if (dotPosition == -1)
+            return number;
+
+        return number.substring(0, dotPosition + 3);
     }
 }
